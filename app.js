@@ -69,6 +69,21 @@ app.post("/astronauts", async (req, res) => {
 /* Write the request handler to return the data from the function getAstronautById. Have this handler listen to requests at the 
 appropriate path. */
 
+app.get("/astronauts/:id", async (req, res) => {
+  try {
+    const astronaut = await getAstronautById(req.params.id);
+    res.json({
+      success: true,
+      payload: astronaut,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      payload: error.message,
+    });
+  }
+});
+
 // Task 4
 
 /* Write the request handler to perform the action and return the data from the function replaceAstronautById. Have this handler 
